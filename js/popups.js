@@ -131,7 +131,7 @@
             console.assert("Paragraph is missing at generating content of the pop-up.", !paragraph);
             popUp.append
             (
-              "<ul><li><a href='" + Share.vkontakte(document.URL + '#' + paragraph.attr('id'), document.title, 'http://www.vedabase.com/sites/default/files/xbbt-logo.jpg', paragraph.text( )) + "'>Share VK.</a></li></ul>"
+              "<ul><li><a href='" + Share.vkontakte(document.URL + '#' + paragraph.attr('id'), document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share VK.</a></li></ul>"
             );
             show(doneAnchor);
             popUp.append(doneAnchor);
