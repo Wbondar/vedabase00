@@ -1,9 +1,14 @@
+/*
+ * Depends on: 
+ * http://vk.com/js/api/share.js?90
+ */
+
 (function() {
     jQuery(document).ready(function() {
         // Setup page.
         var selectedParagraph;
 
-        jQuery('body').append("<div id='popup' class='popup hidden'><p>Placeholder.</p></div>");
+        jQuery('body').append("<div id='popup' class='popup hidden'><p>You shouldn't see this.</p></div>");
         var popUp = jQuery('#popup');
 
         jQuery('body').append("<span class='share hidden' ><a id='share' href='#'><i class='fa fa-bars'></i></a></span>");
@@ -54,8 +59,87 @@
             popUpHide();
         };
 
+        /*http://habrahabr.ru/post/156185/*/
+        var Share = {
+            vkontakte: function(purl, ptitle, pimg, text) {
+                url  = 'http://vkontakte.ru/share.php?';
+                url += 'url='          + encodeURIComponent(purl);
+                url += '&title='       + encodeURIComponent(ptitle);
+                url += '&description=' + encodeURIComponent(text);
+                url += '&image='       + encodeURIComponent(pimg);
+                url += '&noparse=true';
+                /*Share.popup(url);*/
+                return url;
+            },
+            odnoklassniki: function(purl, text) {
+                url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
+                url += '&st.comments=' + encodeURIComponent(text);
+                url += '&st._surl='    + encodeURIComponent(purl);
+                /*Share.popup(url);*/
+                return url;
+            },
+            facebook: function(purl, ptitle, pimg, text) {
+                url  = 'http://www.facebook.com/sharer.php?s=100';
+                url += '&p[title]='     + encodeURIComponent(ptitle);
+                url += '&p[summary]='   + encodeURIComponent(text);
+                url += '&p[url]='       + encodeURIComponent(purl);
+                url += '&p[images][0]=' + encodeURIComponent(pimg);
+                /*Share.popup(url);*/
+                return url;
+            },
+            twitter: function(purl, ptitle) {
+                url  = 'http://twitter.com/share?';
+                url += 'text='      + encodeURIComponent(ptitle);
+                url += '&url='      + encodeURIComponent(purl);
+                url += '&counturl=' + encodeURIComponent(purl);
+                /*Share.popup(url);*/
+                return url;
+            },
+            mailru: function(purl, ptitle, pimg, text) {
+                url  = 'http://connect.mail.ru/share?';
+                url += 'url='          + encodeURIComponent(purl);
+                url += '&title='       + encodeURIComponent(ptitle);
+                url += '&description=' + encodeURIComponent(text);
+                url += '&imageurl='    + encodeURIComponent(pimg);
+                Share.popup(url)
+            },
+
+            popup: function(url) {
+                window.open(url,'','toolbar=0,status=0,width=626,height=436');
+            }
+        };
+
+        var generatePopUpContent = function (paragraphId)
+        {
+            /* Move anchor to different location
+             * in order to keep it's event handler alive
+             * when content of the pop-up will be cleared.
+             */
+            console.assert("Done anchor is missing.", !doneAnchor);
+            jQuery('body').after(doneAnchor);
+            hide(doneAnchor);
+
+            /* Remove content of the pop-up,
+             * in order to avoid duplications.
+             */
+            console.assert("Pop-up is missing.", !popUp);
+            popUp.contents().replaceWith("");
+
+            /* 
+             * Generate content of the pop-up.
+             */
+            /*
+             * Generate VK share button.
+             */
+            popUp.append
+            (
+              "<ul><li><a href='" + Share.vkontakte(document.URL + '#' + paragraphId, 'Title of the paragraph.','http://preacher.hari.ru/images/iskcon-logo.jpg','Description of the paragraph.') + "'>Share VK.</a></li></ul>"
+            );
+            show(doneAnchor);
+            popUp.append(doneAnchor);
+        }
+
         var select = function (objectToSelect) {
-            // if (selectedParagraph != null)
             if (selectedParagraph) {
                 deselect(selectedParagraph);
             }
@@ -74,26 +158,7 @@
             var paragraph = jQuery(paragraphId);
 
             select(paragraph);
-
-            /* Move anchor to different location
-             * in order to keep it's event handler alive
-             * when content of the pop-up will be cleared.
-             */
-            console.assert("Done anchor is missing.", !doneAnchor);
-            jQuery('body').after(doneAnchor);
-            hide(doneAnchor);
-
-            /* Remove content of the pop-up,
-             * in order to avoid duplications.
-             */
-            console.assert("Pop-up is missing.", !popUp);
-            popUp.contents().replaceWith("");
-
-            /* Generate content of the pop-up.
-            */
-            popUp.append("<p>Content of the pop-up for the paragraph with id of " + paragraphId + ".</p>");
-            show(doneAnchor);
-            popUp.append(doneAnchor);
+            generatePopUpContent(paragraphId);
 
             return false;
         });
