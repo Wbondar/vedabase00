@@ -130,7 +130,7 @@
              */
             popUp.append
             (
-              "<ul><li><a href='" + Share.vkontakte(document.URL + paragraph.id, 'Title of the paragraph.', paragraph.innerHTML) + "'>Share VK.</a></li></ul>"
+              "<ul><li><a href='" + Share.vkontakte(document.URL + paragraph.id, 'Title of the paragraph.', '', paragraph.innerHTML) + "'>Share VK.</a></li></ul>"
             );
             show(doneAnchor);
             popUp.append(doneAnchor);
