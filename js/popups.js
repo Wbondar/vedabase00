@@ -101,8 +101,14 @@
                 url += '&title='       + encodeURIComponent(ptitle);
                 url += '&description=' + encodeURIComponent(text);
                 url += '&imageurl='    + encodeURIComponent(pimg);
-                Share.popup(url)
+                return url;
             },
+            plusgoogle: function (purl)
+            {
+                url  = 'https://plus.google.com/share?';
+                url += 'url=' + encodeURIComponent(purl);
+                return url;
+            }
 
             popup: function(url) {
                 window.open(url,'','toolbar=0,status=0,width=626,height=436');
@@ -134,7 +140,8 @@
               "<ul>\
                 <li><a href='" + Share.vkontakte(document.URL + '#' + paragraph.attr('id'), document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share VK.</a></li>\
                 <li><a href='" + Share.facebook(document.URL + '#' + paragraph.attr('id'), document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share Facebook.</a></li>\
-                <li><a href='" + Share.twitter(document.URL + '#' + paragraph.attr('id'), document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share Twitter.</a></li>\
+                <li><a href='" + Share.twitter(document.URL + '#' + paragraph.attr('id'), document.title) + "'>Share Twitter.</a></li>\
+                <li><a href='" + Share.plusgoogle(document.URL + '#' + paragraph.attr('id')) + "'>Share Google+.</a></li>\
                 </ul>"
             );
             show(doneAnchor);
