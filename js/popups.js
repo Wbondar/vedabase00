@@ -108,7 +108,7 @@
                 url  = 'https://plus.google.com/share?';
                 url += 'url=' + encodeURIComponent(purl);
                 return url;
-            }
+            },
 
             popup: function(url) {
                 window.open(url,'','toolbar=0,status=0,width=626,height=436');
