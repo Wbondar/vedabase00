@@ -109,7 +109,7 @@
             }
         };
 
-        var generatePopUpContent = function (paragraphId)
+        var generatePopUpContent = function (paragraph)
         {
             /* Move anchor to different location
              * in order to keep it's event handler alive
@@ -128,12 +128,9 @@
             /* 
              * Generate content of the pop-up.
              */
-            /*
-             * Generate VK share button.
-             */
             popUp.append
             (
-              "<ul><li><a href='" + Share.vkontakte(document.URL + '#' + paragraphId, 'Title of the paragraph.','http://preacher.hari.ru/images/iskcon-logo.jpg','Description of the paragraph.') + "'>Share VK.</a></li></ul>"
+              "<ul><li><a href='" + Share.vkontakte(document.URL + paragraph.id, 'Title of the paragraph.', paragraph.innerHTML) + "'>Share VK.</a></li></ul>"
             );
             show(doneAnchor);
             popUp.append(doneAnchor);
@@ -149,6 +146,7 @@
             jQuery('body').addClass('popup-active');
 
             overlayShow();
+            generatePopUpContent(paragraph);
             popUpShow();
         };
 
@@ -158,7 +156,6 @@
             var paragraph = jQuery(paragraphId);
 
             select(paragraph);
-            generatePopUpContent(paragraphId);
 
             return false;
         });
