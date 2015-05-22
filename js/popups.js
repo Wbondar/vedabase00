@@ -130,7 +130,7 @@
              */
             popUp.append
             (
-              "<ul><li><a href='" + Share.vkontakte(document.URL + paragraph.id, 'Title of the paragraph.', '', paragraph.innerHTML) + "'>Share VK.</a></li></ul>"
+              "<ul><li><a href='" + Share.vkontakte(document.URL + '#' + paragraph.id, document.title, 'http://www.vedabase.com/sites/default/files/xbbt-logo.jpg.pagespeed.ic.-H5gMfchNQ.webp', paragraph.text( )) + "'>Share VK.</a></li></ul>"
             );
             show(doneAnchor);
             popUp.append(doneAnchor);
