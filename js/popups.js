@@ -135,13 +135,14 @@
              * Generate content of the pop-up.
              */
             console.assert("Paragraph is missing at generating content of the pop-up.", !paragraph);
+            var url = document.URL.substring(0, document.URL.indexOf('#')) + '#' + paragraph.attr('id');
             popUp.append
             (
               "<ul>\
-                <li><a href='" + Share.vkontakte(document.URL + '#' + paragraph.attr('id'), document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share VK.</a></li>\
-                <li><a href='" + Share.facebook(document.URL + '#' + paragraph.attr('id'), document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share Facebook.</a></li>\
-                <li><a href='" + Share.twitter(document.URL + '#' + paragraph.attr('id'), document.title) + "'>Share Twitter.</a></li>\
-                <li><a href='" + Share.plusgoogle(document.URL + '#' + paragraph.attr('id')) + "'>Share Google+.</a></li>\
+                <li><a href='" + Share.vkontakte(url, document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share VK.</a></li>\
+                <li><a href='" + Share.facebook(url, document.title, 'http://preacher.hari.ru/images/iskcon-logo.jpg', paragraph.text( )) + "'>Share Facebook.</a></li>\
+                <li><a href='" + Share.twitter(url, document.title) + "'>Share Twitter.</a></li>\
+                <li><a href='" + Share.plusgoogle(url) + "'>Share Google+.</a></li>\
                 </ul>"
             );
             show(doneAnchor);
