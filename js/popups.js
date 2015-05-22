@@ -146,7 +146,7 @@
             jQuery('body').addClass('popup-active');
 
             overlayShow();
-            generatePopUpContent(paragraph);
+            generatePopUpContent(objectToSelect);
             popUpShow();
         };
 
